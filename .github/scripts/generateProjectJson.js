@@ -8,7 +8,7 @@ const getMeta = (label) => {
 };
 
 const data = {
-  title: getMeta('PROJECT_TITLE'),
+  name: getMeta('PROJECT_TITLE'),
   slug: getMeta('PROJECT_SLUG'),
   tags: getMeta('PROJECT_TAGS').split(',').map(tag => tag.trim()),
   demo: getMeta('PROJECT_DEMO'),
