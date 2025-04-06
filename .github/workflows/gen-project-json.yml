@@ -1,0 +1,33 @@
+name: Generate project.json
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  generate-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js (for script)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run generator script
+        run: node .github/scripts/generateProjectJson.js
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add project.json
+          git commit -m "Auto-generate project.json from README"
+          git push
+        continue-on-error: true
