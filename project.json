@@ -3,5 +3,6 @@
   "slug": "template-ml-project",
   "tags": ["ML", "Python", "Template"],
   "demo": "",
-  "github": "https://github.com/ikshv/template-ml-project"
+  "github": "https://github.com/ikshv/template-ml-project",
+  "live": true
 }
