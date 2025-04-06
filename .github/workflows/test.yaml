@@ -1,7 +1,7 @@
-name: Test PAT Push
+name: Test PAT Push with Commit and Push Style
 
 on:
-  workflow_dispatch:  # Allows you to manually trigger this workflow
+  workflow_dispatch:  # Allows you to manually trigger the workflow
 
 jobs:
   test-push:
@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_API_TOKEN }}
 
       - name: Create or update test file
         run: |
@@ -16,15 +18,13 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config user.name "ikshv"
-          git config user.email "ikshvartsman@gmail.com"
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
 
       - name: Commit and push changes
         run: |
           git add test.txt
-          if ! git diff --cached --quiet; then
-            git commit -m "Test commit for PAT push [skip ci]"
-            git push https://x-access-token:${{ secrets.GH_API_TOKEN }}@github.com/${{ github.repository }}.git HEAD:master
-          else
-            echo "No changes to commit"
-          fi
+          git commit -m "Test commit for PAT push [skip ci]" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_API_TOKEN }}
