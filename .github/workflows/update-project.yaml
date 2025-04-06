@@ -1,20 +1,17 @@
-name: Generate project.json
+name: Update Project Data and Notify Portfolio
 
 on:
   push:
     branches: [master]
 
 jobs:
-  generate-json:
-    # Skip the job if the commit message contains "[skip ci]"
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+  update-project-json:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js (for script)
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
@@ -25,15 +22,21 @@ jobs:
       - name: Run generator script
         run: node .github/scripts/generateProjectJson.js
 
-      - name: Push changes
+      - name: Commit and push project.json changes
         run: |
           git config user.name "ikshv"
           git config user.email "ikshvartsman@gmail.com"
           git add project.json
-          # Check if there are changes before committing
           if ! git diff --cached --quiet; then
             git commit -m "Auto-generate project.json from README [skip ci]"
-            git push https://x-access-token:${{ secrets.GH_API_TOKEN }}@github.com/${{ github.repository }} HEAD:master
+            git push https://x-access-token:${{ secrets.GH_API_TOKEN }}@github.com/${{ github.repository }}.git HEAD:master
           else
             echo "No changes to commit"
           fi
+
+      - name: Trigger Portfolio Update
+        run: |
+          curl -X POST https://api.github.com/repos/ikshv/ikshv.github.io/dispatches \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${{ secrets.GH_API_TOKEN }}" \
+          -d '{"event_type": "project-json-update", "client_payload": {"repo": "${{ github.repository }}"}}'
