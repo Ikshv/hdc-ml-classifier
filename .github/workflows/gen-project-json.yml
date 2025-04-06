@@ -23,10 +23,10 @@ jobs:
       - name: Run generator script
         run: node .github/scripts/generateProjectJson.js
 
-      - name: Commit and push project.json
+      - name: Push changes
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "ikshv"
+          git config user.email "ikshvartsman@gmail.com"
           git add project.json
           git commit -m "Auto-generate project.json from README"
           git push https://x-access-token:${{ secrets.GH_API_TOKEN }}@github.com/${{ github.repository }} HEAD:main
