@@ -30,4 +30,3 @@ jobs:
           git add project.json
           git commit -m "Auto-generate project.json from README"
           git push https://x-access-token:${{ secrets.GH_API_TOKEN }}@github.com/${{ github.repository }} HEAD:main
-
