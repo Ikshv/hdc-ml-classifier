@@ -1,0 +1,20 @@
+{
+  "name": "hdc-ml-classifier",
+  "version": "1.0.0",
+  "description": "<!-- PROJECT_TITLE: HDC ML Classifier -->\r <!-- PROJECT_SLUG: hdc-ml-classifier -->\r <!-- PROJECT_TAGS: ML, Python, HDC -->\r <!-- PROJECT_DEMO: https://your-app-link.com -->\r <!-- PROJECT_LIVE: true -->",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ikshv/hdc-ml-classifier.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ikshv/hdc-ml-classifier/issues"
+  },
+  "homepage": "https://github.com/Ikshv/hdc-ml-classifier#readme"
+}

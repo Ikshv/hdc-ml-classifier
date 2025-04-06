@@ -1,3 +1,9 @@
+<!-- PROJECT_TITLE: HDC ML Classifier -->
+<!-- PROJECT_SLUG: hdc-ml-classifier -->
+<!-- PROJECT_TAGS: ML, Python, HDC -->
+<!-- PROJECT_DEMO: https://your-app-link.com -->
+<!-- PROJECT_LIVE: true -->
+
 # Project Title
 
 ## Overview
