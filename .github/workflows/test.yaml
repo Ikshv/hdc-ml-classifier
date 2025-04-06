@@ -1,0 +1,30 @@
+name: Test PAT Push
+
+on:
+  workflow_dispatch:  # Allows you to manually trigger this workflow
+
+jobs:
+  test-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Create or update test file
+        run: |
+          echo "Test commit at $(date)" > test.txt
+
+      - name: Configure Git
+        run: |
+          git config user.name "ikshv"
+          git config user.email "ikshvartsman@gmail.com"
+
+      - name: Commit and push changes
+        run: |
+          git add test.txt
+          if ! git diff --cached --quiet; then
+            git commit -m "Test commit for PAT push [skip ci]"
+            git push https://x-access-token:${{ secrets.GH_API_TOKEN }}@github.com/${{ github.repository }}.git HEAD:master
+          else
+            echo "No changes to commit"
+          fi
