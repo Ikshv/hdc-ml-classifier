@@ -1,7 +1,7 @@
 {
   "name": "Template ML Project",
   "slug": "template-ml-project",
-  "tags": ["ML", "Python", "Template"],
+  "tags": ["ML", "Python", "HDC"],
   "demo": "",
   "github": "https://github.com/ikshv/hdc-ml-classifier",
   "live": true
